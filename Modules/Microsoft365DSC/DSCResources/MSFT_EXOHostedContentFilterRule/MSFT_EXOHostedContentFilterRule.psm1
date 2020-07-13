@@ -206,6 +206,11 @@ function Set-TargetResource
         $CreationParams = $PSBoundParameters
         $CreationParams.Remove("Ensure") | Out-Null
         $CreationParams.Remove("GlobalAdminAccount") | Out-Null
+
+        # New-HostedContentFilterRule doesn't have an Identity parameter
+        $CreationParams.Add("Name",$Identity) | Out-Null
+        $CreationParams.Remove("Identity") | Out-Null
+
         if ($Enabled -and ('Disabled' -eq $CurrentValues.State))
         {
             # New-HostedContentFilterRule has the Enabled parameter, Set-HostedContentFilterRule does not.
@@ -221,6 +226,11 @@ function Set-TargetResource
         $UpdateParams = $PSBoundParameters
         $UpdateParams.Remove("Ensure") | Out-Null
         $UpdateParams.Remove("GlobalAdminAccount") | Out-Null
+
+        # Set-HostedContentFilterRule doesn't have an Identity parameter
+        $CreationParams.Add("Name",$Identity) | Out-Null
+        $CreationParams.Remove("Identity") | Out-Null
+
         Write-Verbose -Message "Updating HostedContentFilterRule {$Identity}"
         Set-HostedContentFilterRule @UpdateParams
     }

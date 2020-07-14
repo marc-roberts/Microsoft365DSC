@@ -256,10 +256,10 @@ function Get-TargetResource
             Identity                                 = $Identity
             AddXHeaderValue                          = $HostedContentFilterPolicy.AddXHeaderValue
             AdminDisplayName                         = $HostedContentFilterPolicy.AdminDisplayName
-            AllowedSenderDomains                     = $HostedContentFilterPolicy.AllowedSenderDomains
-            AllowedSenders                           = $HostedContentFilterPolicy.AllowedSenders
-            BlockedSenderDomains                     = $HostedContentFilterPolicy.BlockedSenderDomains
-            BlockedSenders                           = $HostedContentFilterPolicy.BlockedSenders
+            AllowedSenderDomains                     = $HostedContentFilterPolicy.AllowedSenderDomains.Domain
+            AllowedSenders                           = $HostedContentFilterPolicy.AllowedSenders.Sender | Select-Object -ExpandProperty Address
+            BlockedSenderDomains                     = $HostedContentFilterPolicy.BlockedSenderDomains.Domain
+            BlockedSenders                           = $HostedContentFilterPolicy.BlockedSenders.Sender | Select-Object -ExpandProperty Address
             BulkSpamAction                           = $HostedContentFilterPolicy.BulkSpamAction
             BulkThreshold                            = $HostedContentFilterPolicy.BulkThreshold
             DownloadLink                             = $HostedContentFilterPolicy.DownloadLink
